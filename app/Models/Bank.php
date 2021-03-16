@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Bank extends Model
 {
     use HasFactory;
+
+    public function country()
+    {
+        return $this->belgonsToMany(Country::class);
+    }
+
+    public function franchise()
+    {
+        return $this->hasMany(Franchise::class);
+    }
 }

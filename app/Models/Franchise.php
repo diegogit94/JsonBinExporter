@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Franchise extends Model
 {
     use HasFactory;
+
+    public function bank()
+    {
+        return $this->belgonsToMany(Bank::class);
+    }
+
+    public function bin()
+    {
+        return $this->hasMany(Bin::class);
+    }
 }
