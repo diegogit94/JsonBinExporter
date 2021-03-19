@@ -2,41 +2,42 @@
 
 namespace App\Imports;
 
-use App\Model\Bin;
-use App\Model\Franchise;
-use App\Model\Bank;
-use App\Model\Country;
+use App\Models\Bin;
+use App\Models\Franchise;
+use App\Models\Bank;
+use App\Models\Country;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class BinesImport implements ToCollection
+class BinesImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function collection(Collection $row)
+    public function collection(Collection $rows) 
     {
         foreach ($rows as $row) 
         {
             Bin::create([
-                'code' => $row[0],
+                'code' => $row->toArray()['bin'],
             ]);
 
             Franchise::create([
-                'name' => $row[1],
+                'name' => $row->toArray()['franquicia'],
             ]);
 
             Bank::create([
-                'name' => $row[2],
+                'name' => $row->toArray()['banco'],
             ]);
 
             Country::create([
-                'name' => $row[3],
+                'name' => $row->toArray()['pais'],
             ]);
         }
 
-        return back();
+        return back()->with('success', 'Importado Exitosamente');
     }
 }

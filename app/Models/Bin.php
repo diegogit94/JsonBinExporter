@@ -9,6 +9,10 @@ class Bin extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'code',
+    ];
+
     public function franchise()
     {
         return $this->belgonsTo(Franchise::class);

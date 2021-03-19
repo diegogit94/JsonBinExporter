@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Excel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BinesImport;
 
 class ImportController extends Controller
 {
     
-    public function import() 
+    public function import(Request $request) 
     {
-        Excel::import(new BinesImport, 'Bines.xlsx');
+        $file = $request->file('file');
 
-        return redirect('/')->with('success', 'Importado exitosamente!');
+        Excel::import(new BinesImport, $file);
+
+        return redirect('/')->with('success_message', 'Importado exitosamente!');
     }
 
 }
