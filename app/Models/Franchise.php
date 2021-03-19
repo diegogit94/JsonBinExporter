@@ -9,6 +9,10 @@ class Franchise extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function bank()
     {
         return $this->belgonsToMany(Bank::class);
