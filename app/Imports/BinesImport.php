@@ -74,4 +74,13 @@ class BinesImport implements ToCollection, WithHeadingRow, WithValidation
             ],
         ];
     }
+
+    public function prepareForValidation($data, $index)
+    {
+        $data['franquicia'] = strtolower($data['franquicia']);
+        $data['banco'] = strtolower($data['banco']);
+        $data['pais'] = strtolower($data['pais']);
+        
+        return $data;
+    }
 }
