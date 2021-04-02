@@ -51,7 +51,8 @@ class BinesImport implements ToCollection, WithHeadingRow, WithValidation
         return [
             'bin' => [
                 'required',
-                'size:5'
+                'numeric',
+                'digits:6'
             ],
             
             'franquicia' => [
