@@ -9,8 +9,13 @@ use App\Models\Country;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Illuminate\Validation\Rule;
+use App\Constants\BankConstants;
+use App\Constants\CountryConstants;
+use App\Constants\FranchiseConstants;
 
-class BinesImport implements ToCollection, WithHeadingRow
+class BinesImport implements ToCollection, WithHeadingRow, WithValidation
 {
     /**
     * @param array $row
@@ -39,5 +44,43 @@ class BinesImport implements ToCollection, WithHeadingRow
         }
 
         return back()->with('success', 'Importado Exitosamente');
+    }
+
+    public function rules(): array
+    {
+        return [
+            'bin' => [
+                'required',
+                'numeric',
+                'digits:6'
+            ],
+            
+            'franquicia' => [
+                'required',
+                'min:3', 'max:50',
+                Rule::in(FranchiseConstants::FRANCHISES)
+            ],
+
+            'banco' => [
+                'required',
+                'min:3', 'max:70',
+                Rule::in(BankConstants::BANKS)
+            ],
+
+            'pais' => [
+                'required',
+                'min:3', 'max:70',
+                Rule::in(CountryConstants::COUNTRIES)
+            ],
+        ];
+    }
+
+    public function prepareForValidation($data, $index)
+    {
+        $data['franquicia'] = strtolower($data['franquicia']);
+        $data['banco'] = strtolower($data['banco']);
+        $data['pais'] = strtolower($data['pais']);
+        
+        return $data;
     }
 }

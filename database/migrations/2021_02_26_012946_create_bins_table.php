@@ -16,7 +16,7 @@ class CreateBinsTable extends Migration
         Schema::create('bins', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('code')->length('20')->unsigned();
+            $table->string('code')->length('6');
             $table->bigInteger('franchise_id')->unsigned()->nullable();
 
             $table->timestamps();
