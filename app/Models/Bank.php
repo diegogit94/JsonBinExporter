@@ -22,4 +22,9 @@ class Bank extends Model
     {
         return $this->hasMany(Franchise::class);
     }
+
+    public function bankCountry()
+    {
+        return $this->belongsTo(BankCountry::class, 'bank_id');
+    }
 }

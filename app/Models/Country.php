@@ -22,4 +22,9 @@ class Country extends Model
     {
         return $this->hasMany(Bank::class);
     }
+
+    public function bankCountry()
+    {
+        return $this->hasMany(BankCountry::class);
+    }
 }
