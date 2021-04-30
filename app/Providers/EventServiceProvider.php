@@ -10,6 +10,8 @@ use App\Models\Bank;
 use App\Observers\BankObserver;
 use App\Models\Country;
 use App\Observers\CountryObserver;
+use App\Models\Franchise;
+use App\Observers\FranchiseObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -33,5 +35,6 @@ class EventServiceProvider extends ServiceProvider
     {
         Bank::observe(BankObserver::class);
         Country::observe(CountryObserver::class);
+        Franchise::observe(FranchiseObserver::class);
     }
 }
