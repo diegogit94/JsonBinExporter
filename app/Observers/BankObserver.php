@@ -18,6 +18,10 @@ class BankObserver
         BankCountry::create([
             'bank_id' => $bank->id,
         ]);
+
+        BankFranchise::create([
+            'bank_id' => $bank->id,
+        ]);
     }
 
     /**
