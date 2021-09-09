@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
-use App\Models\franchise;
+use App\Models\Franchise;
+use App\Models\BankFranchise;
+use App\Models\Bin;
 
 class FranchiseObserver
 {
@@ -14,13 +16,9 @@ class FranchiseObserver
      */
     public function created(franchise $franchise)
     {
-        BankFranchise::create([
-            'franchise_id' => $franchise->id,
-        ]);
-
-        Bin::create([
-            'franchise_id' => $franchise->id,
-        ]);
+        // Bin::create([
+        //     'franchise_id' => $franchise->id,
+        // ]);
     }
 
     /**

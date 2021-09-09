@@ -15,9 +15,7 @@ class CountryObserver
      */
     public function created(Country $country)
     {
-        BankCountry::create([
-            'country_id' => $country->id,
-        ]);
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class CountryObserver
      */
     public function updated(Country $country)
     {
-        //
+        dd($country->id);
     }
 
     /**

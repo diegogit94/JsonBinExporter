@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Bank;
 use App\Models\BankCountry;
+use App\Models\BankFranchise;
 
 class BankObserver
 {
@@ -15,13 +16,7 @@ class BankObserver
      */
     public function created(Bank $bank)
     {
-        BankCountry::create([
-            'bank_id' => $bank->id,
-        ]);
-
-        BankFranchise::create([
-            'bank_id' => $bank->id,
-        ]);
+        //
     }
 
     /**
