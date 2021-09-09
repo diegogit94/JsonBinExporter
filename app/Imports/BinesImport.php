@@ -26,21 +26,21 @@ class BinesImport implements ToCollection, WithHeadingRow, WithValidation
     {
         foreach ($rows as $row) 
         {
-            Bin::create([
-                'code' => $row->toArray()['bin'],
+            Country::updateOrCreate([
+                'name' => $row->toArray()['pais'],
             ]);
 
-            Franchise::create([
-                'name' => $row->toArray()['franquicia'],
-            ]);
-
-            Bank::create([
+            Bank::updateOrCreate([
                 'name' => $row->toArray()['banco'],
             ]);
 
-            Country::create([
-                'name' => $row->toArray()['pais'],
+            Franchise::updateOrCreate([
+                'name' => $row->toArray()['franquicia'],
             ]);
+
+            Bin::updateOrCreate([
+                'code' => $row->toArray()['bin'],
+            ]);           
         }
 
         return back()->with('success', 'Importado Exitosamente');
@@ -49,16 +49,10 @@ class BinesImport implements ToCollection, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'bin' => [
+            'pais' => [
                 'required',
-                'numeric',
-                'digits:6'
-            ],
-            
-            'franquicia' => [
-                'required',
-                'min:3', 'max:50',
-                Rule::in(FranchiseConstants::FRANCHISES)
+                'min:3', 'max:70',
+                Rule::in(CountryConstants::COUNTRIES)
             ],
 
             'banco' => [
@@ -67,11 +61,17 @@ class BinesImport implements ToCollection, WithHeadingRow, WithValidation
                 Rule::in(BankConstants::BANKS)
             ],
 
-            'pais' => [
+            'franquicia' => [
                 'required',
-                'min:3', 'max:70',
-                Rule::in(CountryConstants::COUNTRIES)
+                'min:3', 'max:50',
+                Rule::in(FranchiseConstants::FRANCHISES)
             ],
+
+            'bin' => [
+                'required',
+                'numeric',
+                'digits:6',
+            ],           
         ];
     }
 

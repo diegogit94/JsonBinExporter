@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankCountryTable extends Migration
+class CreateBankCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBankCountryTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_country', function (Blueprint $table) {
+        Schema::create('bank_countries', function (Blueprint $table) {
             $table->id();
 
             $table->bigInteger('bank_id')->unsigned()->nullable();
@@ -21,9 +21,9 @@ class CreateBankCountryTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('bank_id')->references('id')->on('banks');
+            $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
 
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
 
@@ -34,6 +34,6 @@ class CreateBankCountryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_country');
+        Schema::dropIfExists('bank_countries');
     }
 }

@@ -13,13 +13,13 @@ class Bank extends Model
         'name',
     ];
 
-    public function country()
+    public function countries()
     {
-        return $this->belgonsToMany(Country::class);
+        return $this->belgonsToMany(Country::class, 'bank_countries');
     }
 
-    public function franchise()
+    public function franchises()
     {
-        return $this->hasMany(Franchise::class);
+        return $this->hasMany(Franchise::class, 'bank_franchises');
     }
 }

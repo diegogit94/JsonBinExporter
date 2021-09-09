@@ -18,8 +18,8 @@ class Country extends Model
         'name',
     ];
 
-    public function bank()
+    public function banks()
     {
-        return $this->hasMany(Bank::class);
+        return $this->hasMany(Bank::class, 'bank_countries');
     }
 }

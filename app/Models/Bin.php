@@ -11,6 +11,7 @@ class Bin extends Model
 
     protected $fillable = [
         'code',
+        'franchise_id',
     ];
 
     public function franchise()

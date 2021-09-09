@@ -16,12 +16,12 @@ class CreateBinsTable extends Migration
         Schema::create('bins', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code')->length('6');
+            $table->string('code')->length('6')->nullable();
             $table->bigInteger('franchise_id')->unsigned()->nullable();
 
             $table->timestamps();
 
-            $table->foreign('franchise_id')->references('id')->on('franchises');
+            $table->foreign('franchise_id')->references('id')->on('franchises')->onDelete('cascade');
         });
     }
 

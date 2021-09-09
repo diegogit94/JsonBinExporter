@@ -13,13 +13,13 @@ class Franchise extends Model
         'name',
     ];
 
-    public function bank()
+    public function banks()
     {
-        return $this->belgonsToMany(Bank::class);
+        return $this->belgonsToMany(Bank::class, 'bank_franchises');
     }
 
-    public function bin()
+    public function bins()
     {
-        return $this->hasMany(Bin::class);
+        return $this->hasMany(Bin::class, 'franchise_id');
     }
 }
